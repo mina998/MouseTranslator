@@ -1,5 +1,6 @@
 import sys
 
+from PySide6.QtCore import QTranslator
 from PySide6.QtWidgets import QApplication
 
 from views.home import Home
@@ -13,6 +14,11 @@ listen = KeyListener()
 if __name__ == '__main__':
     #
     app = QApplication(sys.argv)
+    # 翻译右键菜单
+    translator = QTranslator()
+    translator.load('zh_CN.qm')
+    app.installTranslator(translator)
+
     # 主窗口
     home = Home()
     # 设置窗口
