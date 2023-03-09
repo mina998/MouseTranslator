@@ -16,8 +16,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QHBoxLayout,
-    QLabel, QPushButton, QRadioButton, QSizePolicy,
-    QSpacerItem, QTextEdit, QVBoxLayout, QWidget)
+    QLabel, QPushButton, QSizePolicy, QSpacerItem,
+    QTextEdit, QVBoxLayout, QWidget)
 import resource_rc
 
 class Ui_Form(object):
@@ -50,23 +50,6 @@ class Ui_Form(object):
         self.hLayout2 = QHBoxLayout()
         self.hLayout2.setSpacing(5)
         self.hLayout2.setObjectName(u"hLayout2")
-        self.youdao = QRadioButton(Form)
-        self.youdao.setObjectName(u"youdao")
-        self.youdao.setChecked(True)
-
-        self.hLayout2.addWidget(self.youdao)
-
-        self.google = QRadioButton(Form)
-        self.google.setObjectName(u"google")
-
-        self.hLayout2.addWidget(self.google)
-
-        self.deepl = QRadioButton(Form)
-        self.deepl.setObjectName(u"deepl")
-        self.deepl.setEnabled(False)
-
-        self.hLayout2.addWidget(self.deepl)
-
         self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
         self.hLayout2.addItem(self.horizontalSpacer)
@@ -147,9 +130,6 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"\u7ffb\u8bd1-\u5b8f\u70ed\u952e \u3010Ctrl+\\\u3011 ", None))
         self.label.setText(QCoreApplication.translate("Form", u"\u539f\u6587  [\u6709\u9053\u4ec5\u652f\u6301\u81ea\u52a8\u7ffb\u8bd1]", None))
-        self.youdao.setText(QCoreApplication.translate("Form", u"\u6709\u9053", None))
-        self.google.setText(QCoreApplication.translate("Form", u"\u8c37\u6b4c", None))
-        self.deepl.setText(QCoreApplication.translate("Form", u"\u5b9a\u5236", None))
         self.lang_sl.setText(QCoreApplication.translate("Form", u"\u663e\u793a\u539f\u6587", None))
         self.link1.setText(QCoreApplication.translate("Form", u"\u767e\u5ea6", None))
         self.link2.setText(QCoreApplication.translate("Form", u"\u8c37\u6b4c", None))

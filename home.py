@@ -3,7 +3,7 @@ import time
 
 import pyperclip
 from PySide6.QtCore import Qt, QThread, Signal, Slot, QEvent
-from PySide6.QtWidgets import QWidget, QButtonGroup
+from PySide6.QtWidgets import QWidget, QButtonGroup, QRadioButton
 from pynput.keyboard import Controller, Key
 
 from ui.home import Ui_Form
@@ -29,6 +29,9 @@ class Translator(QThread):
         if engine == 'Youdao':
             from api.youdao import Youdao
             return Youdao
+        if engine == 'Baidu':
+            from api.baidu import Baidu
+            return Baidu
         return None
 
     def run(self):
@@ -39,7 +42,7 @@ class Translator(QThread):
 
 class Home(QWidget, Ui_Form):
     #
-    langs = dict(cn='简体中文', auto='自动翻译', en='英语', de='德语', fr='法语', ru='俄语')
+    langs = dict(cn='简体中文', en='英语', de='德语', fr='法语', ru='俄语')
 
     def __init__(self):
         """
@@ -83,12 +86,22 @@ class Home(QWidget, Ui_Form):
 
     def engines_create_group(self):
         # 为UI界面翻译按键创建一个组
-        tr_engines = QButtonGroup(self.hLayout2)
-        tr_engines.addButton(self.youdao, 1)
-        tr_engines.addButton(self.google, 2)
+        trs_engine = QButtonGroup(self.hLayout2)
+        kv = dict(baidu='百度', google='谷歌', youdao='有道', custom='定制')
+        i = 0
+        for k, v in kv.items():
+            btn = QRadioButton(v)
+            btn.setObjectName(k)
+            if i == 0:
+                btn.setChecked(True)
+            if k == 'custom':
+                btn.setEnabled(False)
+            self.hLayout2.insertWidget(i, btn)
+            trs_engine.addButton(btn, i+1)
+            i += 1
         # 翻译引擎改变时
-        tr_engines.buttonClicked.connect(self.thread_tr)
-        return tr_engines
+        trs_engine.buttonClicked.connect(self.thread_tr)
+        return trs_engine
 
     def selected_text(self):
         # 剪贴板原有内容
